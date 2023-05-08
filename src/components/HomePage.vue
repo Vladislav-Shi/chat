@@ -30,6 +30,15 @@
             </table>
         </div>
 
+        <div class="mt-2">
+            <router-link to="/create/" type="button" class="btn btn-outline-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="-1 1 16 17">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                </svg>
+                Создать чат
+            </router-link>
+        </div>
+
     </div>
 </template>
 
@@ -41,12 +50,7 @@ export default {
     name: 'HomePage',
     data() {
         return {
-            chats: [
-                { 'id': 1, 'chatName': 'Mile Janny', 'newMessages': 3, 'link': '/chat/1' },
-                { 'id': 2, 'chatName': 'Флуд и Анархия', 'newMessages': 0, 'link': '/chat/2' },
-                { 'id': 3, 'chatName': 'Секретики', 'newMessages': 1, 'link': '/chat/3' },
-
-            ],
+            chats: [],
             alert: this.$route.query.msg,
             messages: messagesArray
         }
@@ -65,7 +69,7 @@ export default {
         async getChatList() {
             let response = await authAxios.get('api/list/')
             console.log('response', response)
-            if (response.status == 403){
+            if (response.status == 403) {
                 this.$router.push("/signin")
                 return
             }

@@ -69,7 +69,7 @@ const store = createStore({
     async register({ commit }, user) {
       commit("auth_request");
       await axios
-        .post(`${apiRoute["http"]}api/user/`, {
+        .post(`${apiRoute["http"]}api/user/register/`, {
           username: user.username,
           email: user.email,
           password1: user.password1,

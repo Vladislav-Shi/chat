@@ -65,6 +65,12 @@ export default {
         ChatMessage
     },
     methods: {
+
+        async chatInfo(){
+            let response = await authAxios.get(`api/chat/${this.$route.params.id}/`)
+            this.$data.chatName = response.data.name
+        },
+
         chatHistoryToData(data) {
             let messages = []
             data.forEach(element => {
@@ -73,7 +79,7 @@ export default {
             return messages
         },
         async getHistory() {
-            let response = await authAxios.get(`api/chat/${this.$route.params.id}/`)
+            let response = await authAxios.get(`api/chat/${this.$route.params.id}/messages/`)
             this.$data.messages = this.chatHistoryToData(response.data)
         },
 
@@ -94,7 +100,6 @@ export default {
             /**
              * Получает новое сообщение
              */
-            console.log('Its work', event.data)
             let message = JSON.parse(event.data)
             if (message['type'] == 'chat_message') {
                 this.messages.push({
@@ -105,11 +110,12 @@ export default {
             }
         },
     },
-    created: function () {
+    created() {
         this.$data.connection = new WebSocket(`ws://localhost:8000/ws/chat/${this.$route.params.id}/?token=${this.$store.state.auth.access_token}`)
 
         this.$data.connection.onmessage = this.get_message
 
+        this.chatInfo()
         this.getHistory()
     },
 

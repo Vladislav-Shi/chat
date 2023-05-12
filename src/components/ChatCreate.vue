@@ -17,8 +17,8 @@
                     <div class="row">
                         <div class="col">
                             <h5 class="title">Добавить</h5>
-                            <div class="card user-card">
-                                <div class="list-group">
+                            <div class="card">
+                                <div class="list-group user-card border">
                                     <button type="button" class="list-group-item list-group-item-action" @dblclick="removeUser(index)"
                                         v-for="user, index in addedUsers" :key="user">
                                         {{ user.username }}
@@ -30,10 +30,11 @@
                         <div class="col-1"></div>
                         <div class="col">
                             <h5 class="title">Все пользователи</h5>
-                            <div class="card user-card">
-                                <div class="list-group">
+                            <div class="card">
+                                <div class="list-group user-card border">
                                     <button type="button" :disabled="user.select" :class="`list-group-item list-group-item-action`" @dblclick="addUser(index)"
                                         v-for="user, index in users" :key="user">
+                                        <img class="chat-img" :src="user.avatar"/>
                                         {{ user.username }}
                                     </button>
                                 </div>

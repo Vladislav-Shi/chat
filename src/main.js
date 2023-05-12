@@ -6,6 +6,10 @@ import VueAxios from "vue-axios";
 import apiRoute from "./utils";
 import store from "./store";
 
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
+
+
 const app = createApp(App);
 
 app.use(router);
